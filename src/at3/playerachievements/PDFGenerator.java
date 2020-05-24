@@ -5,6 +5,8 @@
  */
 package at3.playerachievements;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+
 /**
  *
  * @author Ben
@@ -18,6 +20,6 @@ public class PDFGenerator {
     
     public void generatePDF()
     {
-        //PDDocument playerAchievementsDoc = new PDDocument();
+        PDDocument playerAchievementsDoc = new PDDocument();
     }
 }
