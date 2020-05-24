@@ -17,7 +17,7 @@ public class PdfGenerator {
     {
         try {
             PDDocument doc = new PDDocument();
-            doc.save("C:/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/testPdf");
+            doc.save("C:/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testpdf.pdf");
             doc.close();
         } catch (IOException ex) {
             Logger.getLogger(PdfGenerator.class.getName()).log(Level.SEVERE, null, ex);
