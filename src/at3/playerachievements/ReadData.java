@@ -45,7 +45,7 @@ public class ReadData {
                         player = newPlayer;
                     }
                                       
-                    //System.out.println("Player| Username: " + player.getUsername() + ", Tagname: " + player.getTagname() + ", ID: " + player.getPlayerId());
+                    System.out.println("Player| Username: " + player.getUsername() + ", Tagname: " + player.getTagname() + ", ID: " + player.getPlayerId());
                 }
             }
         }
