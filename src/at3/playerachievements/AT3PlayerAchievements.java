@@ -16,7 +16,8 @@ public class AT3PlayerAchievements {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       
+       PdfGenerator g = new PdfGenerator();
+       g.generatePdf();
     }
     
 }
