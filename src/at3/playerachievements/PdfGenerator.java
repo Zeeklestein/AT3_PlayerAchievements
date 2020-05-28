@@ -33,12 +33,10 @@ public class PdfGenerator {
             readData.filePath(at3csvFile);
             newPlayer = readData.readFilePlayers(player);
             
-            //for loop to add 3 pages
-            for (int i = 0; i<3; i++)
-            {
-                PDPage newPage = new PDPage();
-                playerAchievementPdf.addPage(newPage);
-            }
+            //add 1 page to the pdf
+            PDPage newPage = new PDPage();
+            playerAchievementPdf.addPage(newPage);
+            
             
             //add player 1 to first page
             PDPage page1 = playerAchievementPdf.getPage(0);
@@ -57,6 +55,8 @@ public class PdfGenerator {
             
             
             contentStream.showText(newPlayer.getUsername() + "" + newPlayer.getTagname());
+            contentStream.newLine();
+            
             
             
             

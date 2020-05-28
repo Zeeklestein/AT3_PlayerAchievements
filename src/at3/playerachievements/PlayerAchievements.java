@@ -250,8 +250,10 @@ public class PlayerAchievements extends javax.swing.JFrame {
         int playerId = (Integer) spinnerPlayerId.getValue();
         
         PdfGenerator pdfGenerator = new PdfGenerator();
-        pdfGenerator.filePath(txtFilePath.getText());
+        pdfGenerator.filePath("/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv");
         pdfGenerator.generatePdf(playerId);
+        
+        
         
     }//GEN-LAST:event_btnSavePlayerPdfActionPerformed
 
