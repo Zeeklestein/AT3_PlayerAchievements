@@ -94,6 +94,8 @@ public class PlayerAchievements extends javax.swing.JFrame {
 
         lblPlayerId.setText("Enter Player ID:");
 
+        txtFilePath.setText("/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv");
+
         lblFilePath.setText("CVS File Path:");
 
         btnOrderDescription.setText("Description");
@@ -250,7 +252,9 @@ public class PlayerAchievements extends javax.swing.JFrame {
         int playerId = (Integer) spinnerPlayerId.getValue();
         
         PdfGenerator pdfGenerator = new PdfGenerator();
-        pdfGenerator.filePath("/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv");
+        pdfGenerator.filePath(txtFilePath.getText());
+        pdfGenerator.saveFilePath("/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testPdf.pdf");
+        
         pdfGenerator.generatePdf(playerId);
         
         

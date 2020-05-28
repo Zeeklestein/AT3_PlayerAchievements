@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -17,9 +18,15 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 public class PdfGenerator {
     
+    String pdfFilePath;
     String at3csvFile;
     
-    public void filePath(String filePath)
+    public void saveFilePath(String filePath)
+    {
+        pdfFilePath = filePath;
+    }
+    
+    public void filePath (String filePath)
     {
         at3csvFile = filePath;
     }
@@ -27,6 +34,7 @@ public class PdfGenerator {
     public void generatePdf(int player) 
     {
         try {
+            //uses pdfbox-2.0.19.jar
             PDDocument playerAchievementPdf = new PDDocument();
             ReadData readData = new ReadData();
             Achievement newAchievement = new Achievement();
@@ -47,10 +55,7 @@ public class PdfGenerator {
                 specificPlayerAchievements.add(newAchivement);
                 }
             }
-         
-           
-            
-            
+
             //add 1 page to the pdf
             PDPage newPage = new PDPage();
             playerAchievementPdf.addPage(newPage);
@@ -71,23 +76,35 @@ public class PdfGenerator {
             //Setting the position for the line
             contentStream.newLineAtOffset(25, 725);
             
-            
-            contentStream.showText(newPlayer.getUsername() + "" + newPlayer.getTagname());
-            
+            contentStream.showText("Player: ");
             contentStream.newLine();
+            contentStream.showText("  Username: " + newPlayer.getUsername());
+            contentStream.newLine();
+            contentStream.showText("  Tagname: " + newPlayer.getTagname());
+            contentStream.newLine();
+            
             for(var achievement : specificPlayerAchievements)
             {
-                contentStream.showText(achievement.getDescription());
+                contentStream.newLine();
+                contentStream.showText("Achievement:");
+                contentStream.newLine();
+                contentStream.showText("  Description: " + achievement.getDescription());
+                contentStream.newLine();
+                contentStream.showText("  Level: " + achievement.getLevel());
+                contentStream.newLine();
+                contentStream.showText("  Maximum: " + achievement.getMaximum());
+                contentStream.newLine();
             }
-            
             
             contentStream.endText();
             contentStream.close();
             
-            
             //Save the document
-            playerAchievementPdf.save("C:/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testpdf.pdf");
+            playerAchievementPdf.save(pdfFilePath);
             playerAchievementPdf.close();
+            
+            JOptionPane.showMessageDialog(null , "Success");
+            
         } catch (IOException ex) {
             Logger.getLogger(PdfGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }

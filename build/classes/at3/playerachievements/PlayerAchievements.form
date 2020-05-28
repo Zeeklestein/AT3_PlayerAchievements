@@ -163,6 +163,9 @@
     <Component class="javax.swing.JSpinner" name="spinnerPlayerId">
     </Component>
     <Component class="javax.swing.JTextField" name="txtFilePath">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFilePath">
       <Properties>
