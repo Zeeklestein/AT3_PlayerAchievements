@@ -1,10 +1,13 @@
 package at3.playerachievements;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
 
     private String username;
     private String tagname;
     private int playerId;
+    private static final long serialVersionUID = 22L;
 
     public Player(String Username, String Tagname, int PlayerId)
     {
@@ -40,4 +43,9 @@ public class Player {
     public void setPlayerId(int PlayerId) {
         this.playerId = PlayerId;
     }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+    
 }
