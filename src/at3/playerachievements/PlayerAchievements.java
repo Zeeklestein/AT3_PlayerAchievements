@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
@@ -36,6 +37,10 @@ public class PlayerAchievements extends javax.swing.JFrame {
         btnOrderLevel = new javax.swing.JButton();
         lblOrderBy = new javax.swing.JLabel();
         btnSavePlayerPdf = new javax.swing.JButton();
+        btnPathBrowse = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,8 +93,6 @@ public class PlayerAchievements extends javax.swing.JFrame {
 
         lblPlayerId.setText("Enter Player ID:");
 
-        txtFilePath.setText("/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv");
-
         lblFilePath.setText("CVS File Path:");
 
         btnOrderDescription.setText("Description");
@@ -115,6 +118,22 @@ public class PlayerAchievements extends javax.swing.JFrame {
             }
         });
 
+        btnPathBrowse.setText("Browse");
+        btnPathBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPathBrowseActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Search for Achievement: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,20 +144,6 @@ public class PlayerAchievements extends javax.swing.JFrame {
                     .addComponent(lblPlayerInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblPlayerId)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spinnerPlayerId, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(95, 95, 95)
-                                .addComponent(lblOrderBy)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnOrderDescription)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnOrderLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblFilePath)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,24 +151,53 @@ public class PlayerAchievements extends javax.swing.JFrame {
                                     .addComponent(btnSavePlayerPdf)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 49, Short.MAX_VALUE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblFilePath)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnPathBrowse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnSearch))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblPlayerId)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(spinnerPlayerId, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(95, 95, 95)
+                                    .addComponent(lblOrderBy)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnOrderDescription)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnOrderLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 30, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFilePath))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                    .addComponent(lblFilePath)
+                    .addComponent(btnPathBrowse))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerId)
                     .addComponent(spinnerPlayerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnOrderDescription)
                     .addComponent(btnOrderLevel)
                     .addComponent(lblOrderBy))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPlayerInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -257,10 +291,38 @@ public class PlayerAchievements extends javax.swing.JFrame {
         //String filename = chooser.getSelectedFile().getName();
 
         pdfGenerator.saveFilePath(path + ".pdf");
-        //"/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testPdf.pdf"
         pdfGenerator.generatePdf(playerId);
  
     }//GEN-LAST:event_btnSavePlayerPdfActionPerformed
+
+    private void btnPathBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPathBrowseActionPerformed
+        JFileChooser chooser=new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        chooser.showOpenDialog(null);
+
+        txtFilePath.setText(chooser.getSelectedFile().getAbsolutePath());
+    }//GEN-LAST:event_btnPathBrowseActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        
+        String userSearch = txtSearch.getText();
+        int playerId = (Integer) spinnerPlayerId.getValue();
+        
+        ReadData readData = new ReadData();
+        readData.filePath(txtFilePath.getText());
+        ArrayList<Achievement> achievementsArray = readData.readFileAchievements();
+        ArrayList<Achievement> foundAch = new ArrayList<>();
+        for(Achievement ach : achievementsArray)
+        {
+            if(ach.getPlayerId() == playerId && ach.getDescription().equals(userSearch))
+            {
+                foundAch.add(ach);
+            } 
+        }
+        AchievementTableModel achievementModel = new AchievementTableModel(foundAch);
+        jTableAchievementData.setModel(achievementModel);
+           
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     
     //orders a row by specified column index
@@ -315,7 +377,10 @@ public class PlayerAchievements extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnOrderDescription;
     private javax.swing.JButton btnOrderLevel;
+    private javax.swing.JButton btnPathBrowse;
     private javax.swing.JButton btnSavePlayerPdf;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAchievementData;
     private javax.swing.JLabel lblFilePath;
@@ -324,5 +389,6 @@ public class PlayerAchievements extends javax.swing.JFrame {
     private javax.swing.JLabel lblPlayerInfo;
     private javax.swing.JSpinner spinnerPlayerId;
     private javax.swing.JTextField txtFilePath;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
