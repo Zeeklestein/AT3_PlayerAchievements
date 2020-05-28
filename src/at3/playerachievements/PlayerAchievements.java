@@ -260,16 +260,12 @@ public class PlayerAchievements extends javax.swing.JFrame {
 //        }
 
         JFileChooser chooser=new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);
         chooser.showSaveDialog(null);
 
         String path = chooser.getSelectedFile().getAbsolutePath();
-        String filename = chooser.getSelectedFile().getName();
+        //String filename = chooser.getSelectedFile().getName();
 
-
-        System.out.println(path);
-        System.out.println(filename);
-        //TODO user defined location
         pdfGenerator.saveFilePath(path + ".pdf");
         //"/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testPdf.pdf"
         pdfGenerator.generatePdf(playerId);
