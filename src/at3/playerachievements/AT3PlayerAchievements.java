@@ -5,8 +5,6 @@
  */
 package at3.playerachievements;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-
 /**
  *
  * @author Ben
@@ -19,8 +17,10 @@ public class AT3PlayerAchievements {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        PDDocument doc = new PDDocument();
-        
+       //PdfGenerator g = new PdfGenerator();
+       //g.filePath("/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv");
+       
+       //g.generatePdf();
     }
     
 }

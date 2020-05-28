@@ -48,6 +48,8 @@
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="btnDisplay" min="-2" pref="75" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnSavePlayerPdf" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="btnExit" min="-2" pref="75" max="-2" attributes="0"/>
                               </Group>
@@ -85,6 +87,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnExit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnDisplay" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSavePlayerPdf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
@@ -160,6 +163,9 @@
     <Component class="javax.swing.JSpinner" name="spinnerPlayerId">
     </Component>
     <Component class="javax.swing.JTextField" name="txtFilePath">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblFilePath">
       <Properties>
@@ -186,6 +192,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Order By:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSavePlayerPdf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save Player to PDF"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSavePlayerPdfActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
