@@ -17,9 +17,9 @@ public class Server {
     {
         ArrayList<Player> playersArray = new ArrayList<Player>();
         serverSocket = new ServerSocket(4445);
-        
+        System.out.println("Waiting for client...");
         while(true)
-        {
+        {           
             socket = serverSocket.accept();
             inStream = new ObjectInputStream(socket.getInputStream());
             Player player = new Player();
@@ -37,6 +37,7 @@ public class Server {
         serverSocket.close();
         socket.close();
         inStream.close();
+        
         return playersArray;        
     }
 
@@ -47,9 +48,11 @@ public class Server {
         players = server.receivePlayers();
         for(Player player : players)
         {
-            System.out.println("Username: " + player.getUsername() + " Tagname: " + player.getTagname());
+            System.out.println("Player: ");
+            System.out.println("  Username: " + player.getUsername());
+            System.out.println("  Tagname: " + player.getTagname());
         }
-        
+        System.out.println("Session Ended.");
     }
     
 }
