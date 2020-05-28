@@ -13,7 +13,7 @@ public class Server {
     ObjectInputStream inStream;
     
     
-    public ArrayList<Player> receivePlayers() throws IOException
+    public ArrayList<Player> receivePlayers() throws IOException, ClassNotFoundException
     {
         ArrayList<Player> playersArray = new ArrayList<Player>();
         serverSocket = new ServerSocket(4445);
@@ -23,6 +23,8 @@ public class Server {
             socket = serverSocket.accept();
             inStream = new ObjectInputStream(socket.getInputStream());
             Player player = new Player();
+            player = (Player) inStream.readObject();
+            
             if(player == null)
             {
                 break;
@@ -33,10 +35,12 @@ public class Server {
             }
         }
         serverSocket.close();
+        socket.close();
+        inStream.close();
         return playersArray;        
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
        
         ArrayList<Player> players;
         Server server = new Server();
