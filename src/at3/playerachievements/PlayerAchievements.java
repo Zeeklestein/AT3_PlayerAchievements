@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
@@ -91,6 +92,13 @@ public class PlayerAchievements extends javax.swing.JFrame {
         });
 
         lblPlayerId.setText("Enter Player ID:");
+
+        txtFilePath.setText("C:\\Users\\Ben\\Desktop\\GitGub Projects\\AT3_PlayerAchievements\\AT3CSV.csv");
+        txtFilePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFilePathActionPerformed(evt);
+            }
+        });
 
         lblFilePath.setText("CVS File Path:");
 
@@ -312,6 +320,7 @@ public class PlayerAchievements extends javax.swing.JFrame {
         readData.filePath(txtFilePath.getText());
         ArrayList<Achievement> achievementsArray = readData.readFileAchievements();
         ArrayList<Achievement> foundAch = new ArrayList<>();
+        Achievement achievement = new Achievement();
         
         //Searches the file based on the player Id and the achievement description.
         for(Achievement ach : achievementsArray)
@@ -321,10 +330,19 @@ public class PlayerAchievements extends javax.swing.JFrame {
                 foundAch.add(ach);
             } 
         }
-        //Adds the found achievement to the jtable.
-        AchievementTableModel achievementModel = new AchievementTableModel(foundAch);
-        jTableAchievementData.setModel(achievementModel);        
+
+        //Adds the found achievement to a dialog box.
+        for(Achievement a : foundAch)
+        {
+            JOptionPane.showMessageDialog(null , "Result Found: \n Description: " + a.getDescription() 
+                    + "\n Level: " + a.getLevel() + "\n Maximum: " + a.getMaximum());
+        }
+                
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtFilePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFilePathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFilePathActionPerformed
       
     public void orderBy(int rowIndex)
     {
@@ -338,6 +356,7 @@ public class PlayerAchievements extends javax.swing.JFrame {
  
         sorter.setSortKeys(sortKeys);
         sorter.sort();
+        
     }
     
     public static void main(String args[]) {
