@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package at3.playerachievements;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 
-/**
- *
- * @author Ben
- */
 public class Client {
 
     Socket socket;
@@ -21,6 +11,7 @@ public class Client {
     
     public void sendPlayer(Player player) throws IOException
     {
+        //Sends the player to the outputStream.
         socket = new Socket("localhost", 4445);
         outputStream = new ObjectOutputStream(socket.getOutputStream());
         outputStream.writeObject(player);
@@ -35,6 +26,7 @@ public class Client {
         Player newPlayer = new Player();
         Client client = new Client();
         
+        //sends the players to the server.
         newPlayer = readData.readFilePlayers(1);
         client.sendPlayer(newPlayer);
         
@@ -46,6 +38,5 @@ public class Client {
         
         newPlayer = null;
         client.sendPlayer(newPlayer);
-    }
-    
+    }   
 }

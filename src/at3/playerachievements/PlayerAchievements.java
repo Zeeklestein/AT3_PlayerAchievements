@@ -1,13 +1,10 @@
 package at3.playerachievements;
 
-import java.awt.Component;
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
@@ -40,7 +37,7 @@ public class PlayerAchievements extends javax.swing.JFrame {
         btnPathBrowse = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblSearch = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,7 +129,7 @@ public class PlayerAchievements extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Search for Achievement: ");
+        lblSearch.setText("Search for Achievement: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,7 +157,7 @@ public class PlayerAchievements extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btnPathBrowse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
+                                    .addComponent(lblSearch)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -175,7 +172,7 @@ public class PlayerAchievements extends javax.swing.JFrame {
                                     .addComponent(btnOrderDescription)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btnOrderLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 30, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -197,7 +194,7 @@ public class PlayerAchievements extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
-                    .addComponent(jLabel1))
+                    .addComponent(lblSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPlayerInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,48 +209,40 @@ public class PlayerAchievements extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
         
     
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         //exits the program
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
-
-    
-    
+  
     private void btnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayActionPerformed
-
-        //creates a new readDAta object
+        //creates a new readData object.
         ReadData readData = new ReadData();
             
-        //gets the csv file path from the text box
-        //TODO add select file path dialog
+        //gets the csv file path from the text box.
         readData.filePath(txtFilePath.getText());
         
-        //gets the value from the spinner
+        //gets the value from the spinner.
         int playerId = (Integer) spinnerPlayerId.getValue();
             
-        //read player data and display player info in a label with current time and date
         Player player = new Player();
         player = readData.readFilePlayers(playerId);
         
-        //create a datetimeformatter object
+        //create a datetimeformatter object.
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YY HH:mm:ss");  
         LocalDateTime currentDateTime = LocalDateTime.now();  
         
-        //displays player associated with achivements and the current datetime
+        //displays player associated with achivements and the current datetime.
         lblPlayerInfo.setText("Achivements of " + player.getUsername() + " at " + dtf.format(currentDateTime));
-        
-        //setPlayerTable(playerId);
-        
-        //creates a new achievement object
+                
+        //creates a new achievement object.
         Achievement newAchievement = new Achievement();        
         ArrayList<Achievement> playerAchievements = new ArrayList<Achievement>();
         ArrayList<Achievement> specificPlayerAchievements = new ArrayList<Achievement>();
         playerAchievements = readData.readFileAchievements();
         
-        //gets the specific achievements of the user specified player id from the spinner
+        //gets the specific achievements of the user specified player id from the spinner.
         for(var newAchivement : playerAchievements)
         {
             if (newAchivement.getPlayerId() == playerId)
@@ -262,49 +251,53 @@ public class PlayerAchievements extends javax.swing.JFrame {
             }
         }
         
-        //display specified player's achievements in jtable
+        //display specified player's achievements in jtable.
         AchievementTableModel achievementModel = new AchievementTableModel(specificPlayerAchievements);
         jTableAchievementData.setModel(achievementModel);       
     }//GEN-LAST:event_btnDisplayActionPerformed
 
     private void btnOrderDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderDescriptionActionPerformed
-        //order rows by column index
+        //order jtable rows by column index.
         orderBy(0);
     }//GEN-LAST:event_btnOrderDescriptionActionPerformed
  
     private void btnOrderLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderLevelActionPerformed
-        //order rows by column index
+        //order jtable rows by column index.
         orderBy(1);
     }//GEN-LAST:event_btnOrderLevelActionPerformed
 
     private void btnSavePlayerPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePlayerPdfActionPerformed
+        //Saves a player's achievements to a PDF.
         int playerId = (Integer) spinnerPlayerId.getValue();
         
         PdfGenerator pdfGenerator = new PdfGenerator();
         pdfGenerator.filePath(txtFilePath.getText());
-
+        
+        //Opens a file choose dialog box to save the PDF in a user specified location.
         JFileChooser chooser=new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);
         chooser.showSaveDialog(null);
-
+        
+        //gets the chosen path and sets it as a string.
         String path = chooser.getSelectedFile().getAbsolutePath();
-        //String filename = chooser.getSelectedFile().getName();
 
+        //Generates and saves the pdf
         pdfGenerator.saveFilePath(path + ".pdf");
         pdfGenerator.generatePdf(playerId);
- 
     }//GEN-LAST:event_btnSavePlayerPdfActionPerformed
 
     private void btnPathBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPathBrowseActionPerformed
+        //Allows the user to browse and select the required .CSV file.
         JFileChooser chooser=new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         chooser.showOpenDialog(null);
-
+           
+        //adds the chosen path to the textbox.
         txtFilePath.setText(chooser.getSelectedFile().getAbsolutePath());
     }//GEN-LAST:event_btnPathBrowseActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        
+        //Searches based on the current playerId set in the spinner.
         String userSearch = txtSearch.getText();
         int playerId = (Integer) spinnerPlayerId.getValue();
         
@@ -312,6 +305,8 @@ public class PlayerAchievements extends javax.swing.JFrame {
         readData.filePath(txtFilePath.getText());
         ArrayList<Achievement> achievementsArray = readData.readFileAchievements();
         ArrayList<Achievement> foundAch = new ArrayList<>();
+        
+        //Searches the file based on the player Id and the achievement description.
         for(Achievement ach : achievementsArray)
         {
             if(ach.getPlayerId() == playerId && ach.getDescription().equals(userSearch))
@@ -319,15 +314,14 @@ public class PlayerAchievements extends javax.swing.JFrame {
                 foundAch.add(ach);
             } 
         }
+        //Adds the found achievement to the jtable.
         AchievementTableModel achievementModel = new AchievementTableModel(foundAch);
-        jTableAchievementData.setModel(achievementModel);
-           
+        jTableAchievementData.setModel(achievementModel);        
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    
-    //orders a row by specified column index
+      
     public void orderBy(int rowIndex)
     {
+        //orders a row by specified column index
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTableAchievementData.getModel());
         jTableAchievementData.setRowSorter(sorter);
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
@@ -380,13 +374,13 @@ public class PlayerAchievements extends javax.swing.JFrame {
     private javax.swing.JButton btnPathBrowse;
     private javax.swing.JButton btnSavePlayerPdf;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAchievementData;
     private javax.swing.JLabel lblFilePath;
     private javax.swing.JLabel lblOrderBy;
     private javax.swing.JLabel lblPlayerId;
     private javax.swing.JLabel lblPlayerInfo;
+    private javax.swing.JLabel lblSearch;
     private javax.swing.JSpinner spinnerPlayerId;
     private javax.swing.JTextField txtFilePath;
     private javax.swing.JTextField txtSearch;
