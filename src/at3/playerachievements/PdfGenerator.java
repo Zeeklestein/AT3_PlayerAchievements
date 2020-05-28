@@ -23,7 +23,7 @@ public class PdfGenerator {
         at3csvFile = filePath;
     }
     
-    public void generatePdf() 
+    public void generatePdf(int player) 
     {
         try {
             PDDocument playerAchievementPdf = new PDDocument();
@@ -31,7 +31,7 @@ public class PdfGenerator {
             Achievement newAchievement = new Achievement();
             Player newPlayer = new Player();
             readData.filePath(at3csvFile);
-            newPlayer = readData.readFilePlayers(1);
+            newPlayer = readData.readFilePlayers(player);
             
             //for loop to add 3 pages
             for (int i = 0; i<3; i++)

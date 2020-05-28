@@ -249,72 +249,9 @@ public class PlayerAchievements extends javax.swing.JFrame {
     private void btnSavePlayerPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavePlayerPdfActionPerformed
         int playerId = (Integer) spinnerPlayerId.getValue();
         
-        ReadData readData = new ReadData();
-        
-        Achievement newAchievement = new Achievement();        
-        ArrayList<Achievement> playerAchievements = new ArrayList<Achievement>();
-        ArrayList<Achievement> specificPlayerAchievements = new ArrayList<Achievement>();
-        playerAchievements = readData.readFileAchievements();
-        
-        //gets the specific achievements of the user specified player id from the spinner
-        for(var newAchivement : playerAchievements)
-        {
-            if (newAchivement.getPlayerId() == playerId)
-            {
-            specificPlayerAchievements.add(newAchivement);
-            }
-        }
-        
-        //display specified player's achievements in jtable
-        AchievementTableModel achievementModel = new AchievementTableModel(specificPlayerAchievements);
-        //jTableAchievementData.setModel(achievementModel); 
-        
-        
-        try {
-            PDDocument playerAchievementPdf = new PDDocument();
-            
-            //Achievement newAchievement = new Achievement();
-            Player newPlayer = new Player();
-            readData.filePath(txtFilePath.getText());
-            newPlayer = readData.readFilePlayers(1);
-            
-            //for loop to add 3 pages
-            for (int i = 0; i<3; i++)
-            {
-                PDPage newPage = new PDPage();
-                playerAchievementPdf.addPage(newPage);
-            }
-            
-            //add player 1 to first page
-            PDPage page1 = playerAchievementPdf.getPage(0);
-            PDPageContentStream contentStream = new PDPageContentStream(playerAchievementPdf, page1);
-            
-            
-            contentStream.beginText();
-            //Setting the font to the Content stream
-             contentStream.setFont( PDType1Font.TIMES_ROMAN, 16 );
-       
-            //Setting the leading
-            contentStream.setLeading(14.5f);
-
-            //Setting the position for the line
-            contentStream.newLineAtOffset(25, 725);
-            
-            
-            contentStream.showText(newPlayer.getUsername() + "" + newPlayer.getTagname());
-            
-            
-            
-            contentStream.endText();
-            contentStream.close();
-            
-            
-            //Save the document
-            playerAchievementPdf.save("C:/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testpdf.pdf");
-            playerAchievementPdf.close();
-        } catch (IOException ex) {
-            Logger.getLogger(PdfGenerator.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        PdfGenerator pdfGenerator = new PdfGenerator();
+        pdfGenerator.filePath(txtFilePath.getText());
+        pdfGenerator.generatePdf(playerId);
         
     }//GEN-LAST:event_btnSavePlayerPdfActionPerformed
 
