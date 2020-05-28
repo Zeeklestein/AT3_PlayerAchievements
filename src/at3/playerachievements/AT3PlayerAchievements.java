@@ -16,7 +16,10 @@ public class AT3PlayerAchievements {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
        PdfGenerator g = new PdfGenerator();
+       g.filePath("/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv");
+       
        g.generatePdf();
     }
     
