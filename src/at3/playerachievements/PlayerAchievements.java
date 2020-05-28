@@ -93,7 +93,6 @@ public class PlayerAchievements extends javax.swing.JFrame {
 
         lblPlayerId.setText("Enter Player ID:");
 
-        txtFilePath.setText("C:\\Users\\Ben\\Desktop\\GitGub Projects\\AT3_PlayerAchievements\\AT3CSV.csv");
         txtFilePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFilePathActionPerformed(evt);
