@@ -6,6 +6,7 @@
 package at3.playerachievements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -33,6 +34,23 @@ public class PdfGenerator {
             readData.filePath(at3csvFile);
             newPlayer = readData.readFilePlayers(player);
             
+            //get user specified achievements  
+            ArrayList<Achievement> playerAchievements = new ArrayList<Achievement>();
+            ArrayList<Achievement> specificPlayerAchievements = new ArrayList<Achievement>();
+            playerAchievements = readData.readFileAchievements();
+        
+            //gets the specific achievements of the user specified player id
+            for(var newAchivement : playerAchievements)
+            {
+                if (newAchivement.getPlayerId() == player)
+                {
+                specificPlayerAchievements.add(newAchivement);
+                }
+            }
+         
+           
+            
+            
             //add 1 page to the pdf
             PDPage newPage = new PDPage();
             playerAchievementPdf.addPage(newPage);
@@ -55,9 +73,12 @@ public class PdfGenerator {
             
             
             contentStream.showText(newPlayer.getUsername() + "" + newPlayer.getTagname());
+            
             contentStream.newLine();
-            
-            
+            for(var achievement : specificPlayerAchievements)
+            {
+                contentStream.showText(achievement.getDescription());
+            }
             
             
             contentStream.endText();
