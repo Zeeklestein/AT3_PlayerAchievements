@@ -20,27 +20,28 @@ public class Client {
     
     public void sendPlayer(Player player) throws IOException
     {
-        socket = new Socket("local", 4445);
+        socket = new Socket("localhost", 4445);
         outputStream = new ObjectOutputStream(socket.getOutputStream());
         outputStream.writeObject(player);
         outputStream.flush();
         outputStream.close();
     }
     
-    public void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         
         ReadData readData = new ReadData();
-        readData.filePath("/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/AT3CSV");
+        readData.filePath("C:/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/AT3CSV.csv");
         Player newPlayer = new Player();
+        Client client = new Client();
         
         newPlayer = readData.readFilePlayers(1);
-        sendPlayer(newPlayer);
+        client.sendPlayer(newPlayer);
         newPlayer = readData.readFilePlayers(2);
-        sendPlayer(newPlayer);
+        client.sendPlayer(newPlayer);
         newPlayer = readData.readFilePlayers(3);
-        sendPlayer(newPlayer);
-        
-        sendPlayer(null);
+        client.sendPlayer(newPlayer);
+        newPlayer = null;
+        client.sendPlayer(newPlayer);
     }
     
 }
