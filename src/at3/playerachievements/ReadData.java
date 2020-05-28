@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 public class ReadData {
     
     private String at3csvFile;
-    //private String at3csvFile = "/Users/Ben/Desktop/GitGub Projects/Java-AT3-NetbeansVer/AT3CSV.csv";
     
     //get file path
     public void filePath(String filePath)
@@ -21,7 +20,6 @@ public class ReadData {
     //reads only the player lines from the .csv file
     public Player readFilePlayers(int playerId)
     {
-
         BufferedReader bufferedReader = null;
         String line = "";
         String csvSplitBy = ",";
@@ -44,8 +42,6 @@ public class ReadData {
                     {
                         player = newPlayer;
                     }
-                                      
-                    //System.out.println("Player| Username: " + player.getUsername() + ", Tagname: " + player.getTagname() + ", ID: " + player.getPlayerId());
                 }
             }
         }
@@ -90,24 +86,15 @@ public class ReadData {
                     achievementArrayList.add(new Achievement(achievements[1], Integer.parseInt(achievements[2]), Integer.parseInt(achievements[3]), playerIdAchievementCounter));
 
                     //Using counters to pair the player id with their achievements. This only works because each player
-                    //has exactly 5 achievements in the csv file. Better option would be to have a column with id already in
-                    //the csv file.
+                    //has exactly 5 achievements in the csv file.
                     if (achievementCounter == 5) {
                         achievementCounter = 1;
-                        playerIdAchievementCounter++;
-                        
+                        playerIdAchievementCounter++;                       
                     }
                     else
                     {
                         achievementCounter++;
                     }
-
-                    
-
-                    //print to console
-                    //for (var achievement : achievementArrayList) {
-                        //System.out.println("Achievement| Description: " + achievement.getDescription() + ", Level: " + achievement.getLevel() + ", Maximum: " + achievement.getLevel() + ", Player ID: " + playerIdAchievementCounter);
-                    //}
                 }
             }
         }
@@ -128,6 +115,5 @@ public class ReadData {
             }
         }
         return achievementArrayList;
-    }
-    
+    }   
 }

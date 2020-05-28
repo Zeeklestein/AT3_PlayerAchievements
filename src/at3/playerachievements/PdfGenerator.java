@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package at3.playerachievements;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -24,18 +18,22 @@ public class PdfGenerator {
     
     public void saveFilePath(String filePath)
     {
+        //gets the file path to save the PDF.
         pdfFilePath = filePath;
     }
     
     public void filePath (String filePath)
     {
+        //gets the file path of the .CSV file.
         at3csvFile = filePath;
     }
     
     public void generatePdf(int player) 
     {
         try {
-            //uses pdfbox-2.0.19.jar
+            //uses pdfbox-2.0.19.jar and commons-logging-1.2.jar.
+            //pdfbox documentation: https://pdfbox.apache.org/2.0/getting-started.html
+            //commons-logging documentation: http://commons.apache.org/proper/commons-logging/guide.html
             PDDocument playerAchievementPdf = new PDDocument();
             ReadData readData = new ReadData();
             Achievement newAchievement = new Achievement();
@@ -68,15 +66,18 @@ public class PdfGenerator {
             
             
             contentStream.beginText();
-            //Setting the font to the Content stream
+            
+            //setting contentStream font. Uses fontbox-2.0.19.jar.
+            //fontbox documentation: refer to pdfbox documention.
              contentStream.setFont( PDType1Font.TIMES_ROMAN, 16 );
        
-            //Setting the leading
-            contentStream.setLeading(14.5f);
+            //Set leading
+            contentStream.setLeading(15f);
 
-            //Setting the position for the line
+            //set line position.
             contentStream.newLineAtOffset(25, 725);
             
+            //Writes each player and formatting.
             contentStream.showText("Player: ");
             contentStream.newLine();
             contentStream.showText("  Username: " + newPlayer.getUsername());
@@ -84,6 +85,7 @@ public class PdfGenerator {
             contentStream.showText("  Tagname: " + newPlayer.getTagname());
             contentStream.newLine();
             
+            //Writes each achievement for each player.
             for(var achievement : specificPlayerAchievements)
             {
                 contentStream.newLine();
@@ -104,6 +106,7 @@ public class PdfGenerator {
             playerAchievementPdf.save(pdfFilePath);
             playerAchievementPdf.close();
             
+            //Show a dialog box when done.
             JOptionPane.showMessageDialog(null , "Success");
             
         } catch (IOException ex) {
