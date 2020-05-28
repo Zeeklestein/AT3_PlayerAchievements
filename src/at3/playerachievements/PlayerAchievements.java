@@ -1,23 +1,14 @@
 package at3.playerachievements;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
 
 public class PlayerAchievements extends javax.swing.JFrame {
 
@@ -200,6 +191,7 @@ public class PlayerAchievements extends javax.swing.JFrame {
         ReadData readData = new ReadData();
             
         //gets the csv file path from the text box
+        //TODO add select file path dialog
         readData.filePath(txtFilePath.getText());
         
         //gets the value from the spinner
@@ -253,15 +245,12 @@ public class PlayerAchievements extends javax.swing.JFrame {
         
         PdfGenerator pdfGenerator = new PdfGenerator();
         pdfGenerator.filePath(txtFilePath.getText());
+        //TODO user defined location
         pdfGenerator.saveFilePath("/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testPdf.pdf");
         
         pdfGenerator.generatePdf(playerId);
-        
-        
-        
+ 
     }//GEN-LAST:event_btnSavePlayerPdfActionPerformed
-
-    
 
     //orders a row by specified column index
     public void orderBy(int rowIndex)
