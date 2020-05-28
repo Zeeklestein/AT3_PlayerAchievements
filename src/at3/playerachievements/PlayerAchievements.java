@@ -1,9 +1,12 @@
 package at3.playerachievements;
 
+import java.awt.Component;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
@@ -245,13 +248,35 @@ public class PlayerAchievements extends javax.swing.JFrame {
         
         PdfGenerator pdfGenerator = new PdfGenerator();
         pdfGenerator.filePath(txtFilePath.getText());
-        //TODO user defined location
-        pdfGenerator.saveFilePath("/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testPdf.pdf");
         
+        //file chooser
+        String filePath = "";
+        
+//        JFileChooser fc = new JFileChooser();
+//        if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
+//        {
+//            filePath = fc.getCurrentDirectory().toString();
+//            
+//        }
+
+        JFileChooser chooser=new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.showSaveDialog(null);
+
+        String path = chooser.getSelectedFile().getAbsolutePath();
+        String filename = chooser.getSelectedFile().getName();
+
+
+        System.out.println(path);
+        System.out.println(filename);
+        //TODO user defined location
+        pdfGenerator.saveFilePath(path + ".pdf");
+        //"/Users/Ben/Desktop/GitGub Projects/AT3_PlayerAchievements/testPdf.pdf"
         pdfGenerator.generatePdf(playerId);
  
     }//GEN-LAST:event_btnSavePlayerPdfActionPerformed
 
+    
     //orders a row by specified column index
     public void orderBy(int rowIndex)
     {
