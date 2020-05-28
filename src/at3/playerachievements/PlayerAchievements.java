@@ -248,16 +248,6 @@ public class PlayerAchievements extends javax.swing.JFrame {
         
         PdfGenerator pdfGenerator = new PdfGenerator();
         pdfGenerator.filePath(txtFilePath.getText());
-        
-        //file chooser
-        String filePath = "";
-        
-//        JFileChooser fc = new JFileChooser();
-//        if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
-//        {
-//            filePath = fc.getCurrentDirectory().toString();
-//            
-//        }
 
         JFileChooser chooser=new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);
